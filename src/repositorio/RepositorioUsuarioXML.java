@@ -16,10 +16,14 @@ import excecoes.UNCException;
 public class RepositorioUsuarioXML implements IRepositorioUsuario{
 
 	private Vector<Perfil> usuarios;
-	
 	private String nomeArquivo;
+	private String caminho;
+	
 	
 	public RepositorioUsuarioXML() {
+		
+		this.caminho = "/home/luca/MyTwitter";
+		this.nomeArquivo = "/perfis.xml";
 		
 		try {
 			
@@ -69,41 +73,56 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 	
 	void carregarUsuarios() throws IOException{
 		
-		File arquivo = new File(this.nomeArquivo);
-		
-		FileInputStream entrada = new FileInputStream(arquivo);
+		File arquivo = new File(this.caminho);
 		
 		if(!arquivo.exists()){
 			
 			arquivo.mkdirs();
 			
-		}else {
+		}
+		
+		arquivo = new File(this.caminho+this.nomeArquivo);
+		
+		if(!arquivo.exists()){
 			
-			XStream xstream = new XStream();
-			
-			this.usuarios = (Vector<Perfil>) xstream.fromXML(entrada);
+			arquivo.createNewFile();
 			
 		}
+		
+		FileInputStream entrada = new FileInputStream(arquivo);
+		
+			
+		XStream xstream = new XStream();
+			
+		this.usuarios = (Vector<Perfil>) xstream.fromXML(entrada);
+			
 		
 	}
 	
 	void salvarUsuarios() throws IOException{
 		
-		File arquivo = new File(this.nomeArquivo);
-		
-		FileOutputStream saida = new FileOutputStream(arquivo);
+		File arquivo = new File(this.caminho);
 		
 		if(!arquivo.exists()) {
 			
 			arquivo.mkdirs();
 			
-		}else {
+		}
 			
-			XStream xstream = new XStream();
+		arquivo = new File(this.caminho+this.nomeArquivo);
+		
+		if(!arquivo.exists()){
 			
-			xstream.toXML(this.usuarios, saida);
+			arquivo.createNewFile();
 			
 		}
+				
+		FileOutputStream saida = new FileOutputStream(arquivo);
+		
+		XStream xstream = new XStream();
+			
+		xstream.toXML(this.usuarios, saida);
+			
 		
 	}
 	

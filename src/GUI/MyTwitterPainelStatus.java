@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -34,34 +35,41 @@ public class MyTwitterPainelStatus extends JPanel{
 		this.statusLabelsPanel = new JPanel();
 		this.statusQuantidadesPanel = new JPanel();
 		
-		this.setMaximumSize(new Dimension(300,500));
-		this.setMinimumSize(new Dimension(300,500));
+		this.setMaximumSize(new Dimension(300,200));
+		this.setMinimumSize(new Dimension(300,200));
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
 		this.usuarioLabel.setMaximumSize(new Dimension(100,30));
 		this.usuarioLabel.setMinimumSize(new Dimension(100,30));
+		this.usuarioLabel.setFont(new Font("Arial",Font.PLAIN,28));
 		this.seguidoresLabel.setMaximumSize(new Dimension(100,30));
 		this.seguidoresLabel.setMinimumSize(new Dimension(100,30));
+		this.seguidoresLabel.setFont(new Font("Arial",Font.BOLD,20));
 		this.seguidosLabel.setMaximumSize(new Dimension(100,30));
 		this.seguidosLabel.setMinimumSize(new Dimension(100,30));
+		this.seguidosLabel.setFont(new Font("Arial",Font.BOLD,20));
 		this.tweetsLabel.setMaximumSize(new Dimension(100,30));
 		this.tweetsLabel.setMinimumSize(new Dimension(100,30));
+		this.tweetsLabel.setFont(new Font("Arial",Font.BOLD,20));
 		this.seguidoresQuantidadeLabel.setMaximumSize(new Dimension(100,30));
 		this.seguidoresQuantidadeLabel.setMinimumSize(new Dimension(100,30));
+		this.seguidoresQuantidadeLabel.setFont(new Font("Arial",Font.PLAIN,16));
 		this.seguidosQuantidadeLabel.setMinimumSize(new Dimension(100,30));
 		this.seguidosQuantidadeLabel.setMaximumSize(new Dimension(100,30));
+		this.seguidosQuantidadeLabel.setFont(new Font("Arial",Font.PLAIN,16));
 		this.tweetsQuantidadeLabel.setMaximumSize(new Dimension(100,30));
 		this.tweetsQuantidadeLabel.setMinimumSize(new Dimension(100,30));
+		this.tweetsQuantidadeLabel.setFont(new Font("Arial",Font.PLAIN,16));
 		
 		this.usuarioLabelPanel.setLayout(new FlowLayout());
 		this.statusLabelsPanel.setLayout(new FlowLayout());
 		this.statusQuantidadesPanel.setLayout(new FlowLayout());
-		this.usuarioLabelPanel.setMaximumSize(new Dimension(300,200));
-		this.usuarioLabelPanel.setMinimumSize(new Dimension(300,200));
-		this.statusLabelsPanel.setMaximumSize(new Dimension(300,150));
-		this.statusLabelsPanel.setMinimumSize(new Dimension(300,150));
-		this.statusQuantidadesPanel.setMinimumSize(new Dimension(300,150));
-		this.statusQuantidadesPanel.setMaximumSize(new Dimension(300,150));
+		this.usuarioLabelPanel.setMaximumSize(new Dimension(400,100));
+		this.usuarioLabelPanel.setMinimumSize(new Dimension(400,100));
+		this.statusLabelsPanel.setMaximumSize(new Dimension(400,50));
+		this.statusLabelsPanel.setMinimumSize(new Dimension(400,50));
+		this.statusQuantidadesPanel.setMinimumSize(new Dimension(400,50));
+		this.statusQuantidadesPanel.setMaximumSize(new Dimension(400,50));
 		
 		this.usuarioLabelPanel.add(this.usuarioLabel);
 		this.usuarioLabelPanel.setBackground(Color.CYAN);

@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -48,9 +49,10 @@ public class MyTwitterPainelToolbar extends JPanel{
 		this.pesquisa.setMaximumSize(new Dimension(300,30));
 		this.pesquisa.setMinimumSize(new Dimension(300,30));
 		
-		this.setLayout(new GridLayout(1,4));
-		this.menu.setLayout(new FlowLayout());
-		this.pesquisa.setLayout(new FlowLayout());
+		//this.setLayout(new GridLayout(1,4));
+		this.setLayout(new BoxLayout(this,BoxLayout.LINE_AXIS));
+		this.menu.setLayout(new BoxLayout(this.menu,BoxLayout.LINE_AXIS));
+		this.pesquisa.setLayout(new BoxLayout(this.pesquisa,BoxLayout.LINE_AXIS));
 		
 		this.menu.add(this.inicio);
 		this.menu.add(this.perfil);
@@ -68,10 +70,10 @@ public class MyTwitterPainelToolbar extends JPanel{
 		this.logout.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		this.setBackground(Color.WHITE);
-		this.add(this.menu,BorderLayout.EAST);
+		this.add(this.menu);
 		this.add(Box.createRigidArea(new Dimension(300,30)));
 		this.add(Box.createRigidArea(new Dimension(300,30)));
-		this.add(this.pesquisa,BorderLayout.WEST);
+		this.add(this.pesquisa);
 		
 		this.menu.setAlignmentY(Component.CENTER_ALIGNMENT);
 		this.pesquisa.setAlignmentY(Component.CENTER_ALIGNMENT);
