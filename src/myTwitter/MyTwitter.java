@@ -9,6 +9,7 @@ import excecoes.PDException;
 import excecoes.PEException;
 import excecoes.PIException;
 import excecoes.SIException;
+import excecoes.UJCException;
 import repositorio.*;
 
 public class MyTwitter implements ITwitter{
@@ -22,9 +23,11 @@ public class MyTwitter implements ITwitter{
 	}
 
 	@Override
-	public void criarPerfil(Perfil usuario) throws PEException {
+	public void criarPerfil(Perfil usuario) throws PEException, UJCException {
 		
 		if(this.repositorio.buscar(usuario.getUsuario()) == null){
+			
+			this.repositorio.cadastrar(usuario);
 			
 		}else {
 			

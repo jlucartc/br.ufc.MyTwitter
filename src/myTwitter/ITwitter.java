@@ -9,10 +9,11 @@ import excecoes.PDException;
 import excecoes.PEException;
 import excecoes.PIException;
 import excecoes.SIException;
+import excecoes.UJCException;
 
 public interface ITwitter {
 
-	void criarPerfil(Perfil usuario) throws PEException;
+	void criarPerfil(Perfil usuario) throws PEException, UJCException;
 	
 	void cancelarPerfil(String usuario) throws PIException, PDException;
 	

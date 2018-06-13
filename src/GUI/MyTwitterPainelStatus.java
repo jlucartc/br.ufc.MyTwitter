@@ -37,6 +37,8 @@ public class MyTwitterPainelStatus extends JPanel{
 		
 		this.setMaximumSize(new Dimension(300,200));
 		this.setMinimumSize(new Dimension(300,200));
+		this.setPreferredSize(new Dimension(300,200));
+		this.setAlignmentY(TOP_ALIGNMENT);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
 		this.usuarioLabel.setMaximumSize(new Dimension(100,30));
