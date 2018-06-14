@@ -9,7 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MyTwitterPainelStatus extends JPanel{
+public class MyTwitterStatus extends JPanel{
 
 	private JLabel usuarioLabel;
 	private JLabel seguidoresLabel;
@@ -22,7 +22,7 @@ public class MyTwitterPainelStatus extends JPanel{
 	private JPanel statusLabelsPanel;
 	private JPanel statusQuantidadesPanel;
 	
-	public MyTwitterPainelStatus(String usuario, int seguidores, int seguidos, int tweets){
+	public MyTwitterStatus(String usuario, int seguidores, int seguidos, int tweets){
 		
 		this.usuarioLabel = new JLabel(usuario);
 		this.seguidoresLabel = new JLabel("Seguidores");

@@ -3,6 +3,13 @@ package classes;
 public class PessoaFisica extends Perfil{
 
 	long cpf;
+	
+	public PessoaFisica(String usuario, long cpf){
+		
+		this.setCpf(cpf);
+		this.setUsuario(usuario);
+		
+	}
 
 	public long getCpf() {
 		return cpf;

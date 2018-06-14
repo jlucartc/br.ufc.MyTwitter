@@ -7,14 +7,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MyTwitterPainelTimelineTweet extends JPanel{
+public class MyTwitterTimelineItem extends JPanel{
 
 	private JLabel autorLabel;
 	private JLabel mensagemLabel;
 	private String autor;
 	private String mensagem;
 	
-	public MyTwitterPainelTimelineTweet(String autor, String mensagem) {
+	public MyTwitterTimelineItem(String autor, String mensagem) {
 		
 		this.autor = autor;
 		this.mensagem = mensagem;

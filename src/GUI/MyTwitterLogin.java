@@ -14,6 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import eventListeners.CadastrarListener;
+import excecoes.PIException;
+import repositorio.IRepositorioUsuario;
+
 public class MyTwitterLogin extends JFrame{
 
 	private JLabel logo;
@@ -21,14 +25,20 @@ public class MyTwitterLogin extends JFrame{
 	private JTextField usuario;
 	private JButton confirmar;
 	private JButton cadastrar;
+	private IRepositorioUsuario repositorio; 
+	private MyTwitterScreenManager screenManager;
 	
-	public MyTwitterLogin() {
+	public MyTwitterLogin(MyTwitterScreenManager screenManager,IRepositorioUsuario repositorio) {
 		
+		this.screenManager = screenManager;
+		this.repositorio = repositorio;
 		this.logo = new JLabel("MyTwitter");
 		this.logoPanel = new JPanel();
 		this.usuario = new JTextField("Usuario: ");
 		this.confirmar = new JButton("Ir");
 		this.cadastrar = new JButton("Cadastre-se");
+		
+		this.cadastrar.addActionListener(new CadastrarListener());
 		
 		this.setMinimumSize(new Dimension(400,1200));
 		this.logoPanel.setMaximumSize(new Dimension(300,200));
@@ -61,5 +71,25 @@ public class MyTwitterLogin extends JFrame{
 		
 	}
 
-
+	public void fazerLogin() throws PIException{
+		
+		if(this.repositorio.buscar(this.usuario.getText()) != null){
+			
+			
+			
+		}else{
+			
+			throw new PIException();
+			
+		}
+		
+	}
+	
+	public void cadastro(){}
+	
+	public MyTwitterScreenManager getScreenManager(){
+		
+		return this.screenManager;
+		
+	}
 }

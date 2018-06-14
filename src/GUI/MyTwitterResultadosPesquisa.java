@@ -12,12 +12,12 @@ import javax.swing.JPanel;
 
 import classes.Perfil;
 
-public class MyTwitterPainelResultadosPesquisa extends JPanel{
+public class MyTwitterResultadosPesquisa extends JPanel{
 
 	private Vector<Perfil> perfis;
 	private JPanel conteudo;
 	
-	MyTwitterPainelResultadosPesquisa(Vector<Perfil> perfis){
+	MyTwitterResultadosPesquisa(Vector<Perfil> perfis){
 		
 		this.perfis = perfis;
 		

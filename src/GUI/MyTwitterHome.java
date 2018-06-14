@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Vector;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,23 +11,25 @@ import javax.swing.JScrollPane;
 
 import classes.Perfil;
 import classes.Tweet;
+import myTwitter.MyTwitter;
 
 public class MyTwitterHome extends JFrame{
 
-	private MyTwitterPainelToolbar toolbar;
-	private MyTwitterPainelStatus status;
+	private MyTwitterToolbar toolbar;
+	private MyTwitterStatus status;
 	private JPanel conteudoPanel;
 	private JPanel timelinePanel;
 	private JPanel statusPanel;
 	private MyTwitterTweetBox tweetBox;
-	private MyTwitterPainelTimeline timeline;
-	private MyTwitterPainelResultadosPesquisa painelResultadosPesquisa;
+	private MyTwitterTimeline timeline;
+	private MyTwitterResultadosPesquisa painelResultadosPesquisa;
 	private Vector<Perfil> resultadosPesquisa;
-	private Perfil perfil;
-
-	public MyTwitterHome(Perfil perfil) {
+	private String usuario;
+	private MyTwitter mytwitter;
+	
+	public MyTwitterHome(String usuario) {
 		
-		this.perfil = perfil;
+		this.usuario = usuario;
 		this.resultadosPesquisa = new Vector<Perfil>();
 		this.carregarTimeline();
 
@@ -38,7 +39,7 @@ public class MyTwitterHome extends JFrame{
 		
 		this.getContentPane().removeAll();
 		
-		this.tweetBox = new MyTwitterTweetBox();
+		this.tweetBox = new MyTwitterTweetBox(this.mytwitter,this.usuario);
 		
 		this.statusPanel = new JPanel();
 		this.statusPanel.setLayout(new BoxLayout(this.statusPanel,BoxLayout.PAGE_AXIS));
@@ -59,9 +60,9 @@ public class MyTwitterHome extends JFrame{
 		JScrollPane scroll = new JScrollPane();
 		JPanel painel = new JPanel();
 
-		this.timeline = new MyTwitterPainelTimeline(vetor);
+		this.timeline = new MyTwitterTimeline(vetor);
 		this.timeline.setAlignmentY(TOP_ALIGNMENT);
-		this.status = new MyTwitterPainelStatus("Usuário",5,5,10);
+		this.status = new MyTwitterStatus("Usuário",5,5,10);
 		this.status.setAlignmentY(TOP_ALIGNMENT);
 		this.status.setBackground(Color.BLACK);
 		
@@ -89,7 +90,7 @@ public class MyTwitterHome extends JFrame{
 		//this.conteudoPanel.add(Box.createRigidArea(new Dimension(20,700)));
 		this.conteudoPanel.add(this.timelinePanel);
 		this.conteudoPanel.setBackground(Color.GREEN);
-		this.toolbar = new MyTwitterPainelToolbar();
+		this.toolbar = new MyTwitterToolbar();
 		this.toolbar.setBackground(Color.gray);
 		
 		this.add(this.toolbar);
@@ -117,9 +118,9 @@ public class MyTwitterHome extends JFrame{
 		this.statusPanel.setPreferredSize(new Dimension(300,700));
 		this.statusPanel.add(this.status);
 
-		this.painelResultadosPesquisa = new MyTwitterPainelResultadosPesquisa(this.resultadosPesquisa);
+		this.painelResultadosPesquisa = new MyTwitterResultadosPesquisa(this.resultadosPesquisa);
 		this.painelResultadosPesquisa.setAlignmentY(TOP_ALIGNMENT);
-		this.status = new MyTwitterPainelStatus("Usuário",5,5,10);
+		this.status = new MyTwitterStatus("Usuário",5,5,10);
 		this.status.setAlignmentY(TOP_ALIGNMENT);
 
 		this.conteudoPanel = new JPanel();
@@ -134,7 +135,7 @@ public class MyTwitterHome extends JFrame{
 		this.conteudoPanel.add(this.statusPanel);
 		this.conteudoPanel.add(this.painelResultadosPesquisa);
 		this.conteudoPanel.setBackground(Color.GREEN);
-		this.toolbar = new MyTwitterPainelToolbar();
+		this.toolbar = new MyTwitterToolbar();
 
 		this.add(this.toolbar);
 		this.add(this.conteudoPanel);

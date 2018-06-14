@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class MyTwitterPainelToolbar extends JPanel{
+public class MyTwitterToolbar extends JPanel{
 
 	private JButton inicio;
 	private JButton perfil;
@@ -23,7 +23,7 @@ public class MyTwitterPainelToolbar extends JPanel{
 	private JButton buscar;
 	private JPanel pesquisa;
 
-	public MyTwitterPainelToolbar(){
+	public MyTwitterToolbar(){
 		
 		this.inicio = new JButton("Home");
 		this.perfil = new JButton("Perfil");

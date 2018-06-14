@@ -85,17 +85,16 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 		
 		if(!arquivo.exists()){
 			
-			arquivo.createNewFile();
+			this.usuarios = new Vector();
 			
+		}else{
+			FileInputStream entrada = new FileInputStream(arquivo);
+			
+				
+			XStream xstream = new XStream();
+				
+			this.usuarios = (Vector<Perfil>) xstream.fromXML(entrada);
 		}
-		
-		FileInputStream entrada = new FileInputStream(arquivo);
-		
-			
-		XStream xstream = new XStream();
-			
-		this.usuarios = (Vector<Perfil>) xstream.fromXML(entrada);
-			
 		
 	}
 	

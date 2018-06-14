@@ -7,13 +7,22 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import excecoes.MFPException;
+import excecoes.PDException;
+import excecoes.PIException;
+import myTwitter.MyTwitter;
+
 public class MyTwitterTweetBox extends JPanel{
 
 	private JButton tweetar;
 	private JTextArea tweet;
+	private String usuario;
+	private MyTwitter mytwitter;
 	
-	MyTwitterTweetBox(){
+	MyTwitterTweetBox(MyTwitter mytwitter,String usuario){
 		
+		this.usuario = usuario;
+		this.mytwitter = mytwitter;
 		this.tweet = new JTextArea("Digite uma mensagem com 140 caracteres");
 		this.tweetar = new JButton("Publicar");
 	
@@ -31,9 +40,9 @@ public class MyTwitterTweetBox extends JPanel{
 		
 	}
 	
-	public String getMensagem(){
+	public void tweetar() throws PIException, MFPException, PDException{
 		
-		return this.tweet.getText();
+		this.mytwitter.tweetar(this.usuario,this.tweet.getText());
 		
 	}
 	

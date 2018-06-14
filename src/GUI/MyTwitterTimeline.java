@@ -15,13 +15,13 @@ import javax.swing.ScrollPaneConstants;
 import classes.Perfil;
 import classes.Tweet;
 
-public class MyTwitterPainelTimeline extends JPanel{
+public class MyTwitterTimeline extends JPanel{
 
 	private Vector<Tweet> tweets;
 	private JPanel conteudo;
 	private Vector<Perfil> resultados;
 	
-	public MyTwitterPainelTimeline(Vector<Tweet> tweets){
+	public MyTwitterTimeline(Vector<Tweet> tweets){
 	
 		this.tweets = tweets;
 		this.carregarTweets();
@@ -66,7 +66,7 @@ public class MyTwitterPainelTimeline extends JPanel{
 			while(iterator.hasNext()) {
 				
 				Tweet tweet = iterator.next();
-				this.conteudo.add(new MyTwitterPainelTimelineTweet(tweet.getUsuario(),tweet.getMensagem()));
+				this.conteudo.add(new MyTwitterTimelineItem(tweet.getUsuario(),tweet.getMensagem()));
 				
 			}
 			
