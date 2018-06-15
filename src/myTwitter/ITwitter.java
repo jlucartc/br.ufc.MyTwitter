@@ -1,5 +1,6 @@
 package myTwitter;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import classes.Perfil;
@@ -13,7 +14,7 @@ import excecoes.UJCException;
 
 public interface ITwitter {
 
-	void criarPerfil(Perfil usuario) throws PEException, UJCException;
+	void criarPerfil(Perfil usuario) throws PEException, UJCException, IOException;
 	
 	void cancelarPerfil(String usuario) throws PIException, PDException;
 	

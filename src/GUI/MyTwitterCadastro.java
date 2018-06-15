@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -14,9 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import classes.PessoaFisica;
-import eventListeners.VoltarListener;
 import excecoes.PEException;
 import excecoes.UJCException;
+import listeners.FazerCadastroListener;
+import listeners.PlaceholderListener;
+import listeners.VoltarListener;
 import myTwitter.MyTwitter;
 
 public class MyTwitterCadastro extends JFrame{
@@ -39,11 +42,12 @@ public class MyTwitterCadastro extends JFrame{
 		
 		this.screenManager = screenManager;
 		this.aviso = new JLabel();
+		this.aviso.setAlignmentX(CENTER_ALIGNMENT);
 		this.cpfLabel = new JLabel("CPF");
 		this.usuarioLabel = new JLabel("Usuário");
 		
 		this.isPessoaFisica = false;
-		this.cpf = new JTextField("Digite seu cpf");
+		this.cpf = new JTextField("Digite seu cpf: ");
 		this.mytwitter = mytwitter;
 		this.logo = new JLabel("MyTwitter");
 		this.logoPanel = new JPanel();
@@ -59,9 +63,12 @@ public class MyTwitterCadastro extends JFrame{
 		this.usuario.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.cadastrar.setMaximumSize(new Dimension(100,30));
 		this.cadastrar.setAlignmentX(Component.LEFT_ALIGNMENT);
+		this.cadastrar.addActionListener(new FazerCadastroListener());
 		this.voltar.setMaximumSize(new Dimension(100,30));
 		this.voltar.setAlignmentX(Component.LEFT_ALIGNMENT);
 		this.voltar.addActionListener(new VoltarListener());
+		this.usuario.addMouseListener(new PlaceholderListener());
+		this.cpf.addMouseListener(new PlaceholderListener());
 		
 		this.botoes.setLayout(new FlowLayout());
 		this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.Y_AXIS));
@@ -103,33 +110,43 @@ public class MyTwitterCadastro extends JFrame{
 			this.mytwitter.criarPerfil(new PessoaFisica(this.usuario.getText(),Long.parseLong(this.cpf.getText())));
 			this.setAviso("Cadastro feito com sucesso!",Color.GREEN);
 			
-		}catch(PEException e){
+		}catch(PEException | UJCException e){
 			
-			this.setAviso("Cadastro inválido!",Color.RED);
+			this.setAviso("Usuário inválido",Color.RED);
 			
-		}catch(UJCException e){
-			
-			this.setAviso("Cadastro inválido!",Color.RED);
-			
+		}catch(NumberFormatException e){
+			this.setAviso("CPF em formato inválido",Color.red);
+			//e.printStackTrace();
+		}catch (IOException e) {
+			this.setAviso("Erro no cadastro",Color.red);
+			//e.printStackTrace();
 		}
 		
 	}
 	
 	public long getCpf(){
 		
-		return Long.parseLong(this.cpf.getText());
+		return Long.parseLong(this.cpf.getText().trim());
 		
 	}
 	
 	public String getUsuario(){
 		
-		return this.usuario.getText();
+		return this.usuario.getText().trim();
 		
 	}
 	
 	public MyTwitterScreenManager getScreenManager(){
 		
 		return this.screenManager;
+		
+	}
+	
+	public void resetar(){
+		
+		this.aviso.setText("");
+		this.usuario.setText("Digite seu usuário: ");
+		this.cpf.setText("Digite seu cpf: ");
 		
 	}
 	

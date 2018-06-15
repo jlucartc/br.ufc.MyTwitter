@@ -10,7 +10,7 @@ import java.util.Vector;
 import com.thoughtworks.xstream.XStream;
 
 import classes.Perfil;
-import excecoes.PIException;
+import excecoes.UJCException;
 import excecoes.UNCException;
 
 public class RepositorioUsuarioXML implements IRepositorioUsuario{
@@ -37,9 +37,10 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 	}
 	
 	@Override
-	public void cadastrar(Perfil usuario) {
+	public void cadastrar(Perfil usuario) throws UJCException, IOException{
 		
-		this.usuarios.addElement(usuario);
+		this.usuarios.add(usuario);
+		this.salvarUsuarios();
 		
 	}
 
@@ -62,12 +63,26 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 		
 		return null;
 		
+		
 	}
 
 	@Override
-	public void atualizar(Perfil usuario) throws UNCException {
+	public void atualizar(Perfil usuario) throws UNCException, IOException {
 	
-		//
+		Perfil perfil = this.buscar(usuario.getUsuario());
+				
+		if(perfil != null){
+			
+			perfil = usuario;
+			
+		}else{
+			
+			throw new UNCException();
+			
+		}
+		
+		this.salvarUsuarios();
+					
 		
 	}
 	

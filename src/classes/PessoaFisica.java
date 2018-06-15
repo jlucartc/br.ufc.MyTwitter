@@ -8,6 +8,7 @@ public class PessoaFisica extends Perfil{
 		
 		this.setCpf(cpf);
 		this.setUsuario(usuario);
+		this.setAtivo(true);
 		
 	}
 

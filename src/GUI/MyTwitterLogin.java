@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import eventListeners.CadastrarListener;
 import excecoes.PIException;
+import listeners.CadastrarListener;
+import listeners.LoginListener;
+import listeners.PlaceholderListener;
 import repositorio.IRepositorioUsuario;
 
 public class MyTwitterLogin extends JFrame{
@@ -54,6 +56,8 @@ public class MyTwitterLogin extends JFrame{
 		this.confirmar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.cadastrar.setMaximumSize(new Dimension(300,30));
 		this.cadastrar.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.usuario.addMouseListener(new PlaceholderListener());
+		this.confirmar.addActionListener(new LoginListener());
 		
 		this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.Y_AXIS));
 		
@@ -90,6 +94,18 @@ public class MyTwitterLogin extends JFrame{
 	public MyTwitterScreenManager getScreenManager(){
 		
 		return this.screenManager;
+		
+	}
+
+	public void resetar(){
+		
+		this.usuario.setText("Usuario: ");
+		
+	}
+	
+	public String getUsuario(){
+		
+		return this.usuario.getText().trim();
 		
 	}
 }

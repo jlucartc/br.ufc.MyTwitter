@@ -1,5 +1,6 @@
 package myTwitter;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -23,16 +24,28 @@ public class MyTwitter implements ITwitter{
 	}
 
 	@Override
-	public void criarPerfil(Perfil usuario) throws PEException, UJCException {
+	public void criarPerfil(Perfil usuario) throws PEException, UJCException, IOException {
 		
-		if(this.repositorio.buscar(usuario.getUsuario()) == null){
-			
-			this.repositorio.cadastrar(usuario);
-			
-		}else {
-			
-			throw new PEException();
-			
+		try{
+			if(this.repositorio.buscar(usuario.getUsuario()) == null){
+				
+				try{
+					
+					this.repositorio.cadastrar(usuario);
+				
+				}catch(UJCException e) {
+					
+					throw new PEException();
+					
+				}
+				
+			}else {
+				
+				throw new PEException();
+			}
+		}catch(IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
