@@ -5,22 +5,27 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import GUI.MyTwitterLogin;
 import GUI.MyTwitterScreenManager;
-import classes.Perfil;
+import GUI.classesAbstratas.MyTwitterViewLogin;
+import GUI.interfaces.MyTwitterView;
+import GUI.interfaces.MyTwitterViewManager;
 
 public class LoginListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		MyTwitterScreenManager screenManager = ((MyTwitterLogin)((JButton)e.getSource()).getTopLevelAncestor()).getScreenManager();
-		String usuario = ((MyTwitterLogin)((JButton)e.getSource()).getTopLevelAncestor()).getUsuario();
-		Perfil perfil = screenManager.getRepositorio().buscar(usuario);
+		MyTwitterViewManager viewManager = ((MyTwitterView)((JButton)e.getSource()).getTopLevelAncestor()).getViewManager();
 
-		if(perfil != null){
+		if(viewManager instanceof MyTwitterScreenManager){
 			
-			screenManager.home(usuario);
+			MyTwitterView view = ((MyTwitterScreenManager) viewManager).getMyTwitterLogin();
+			
+			if(view instanceof MyTwitterViewLogin){
+				
+				((MyTwitterViewLogin) view).fazerLogin();
+				
+			}
 			
 		}
 		

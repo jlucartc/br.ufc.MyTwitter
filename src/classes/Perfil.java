@@ -10,7 +10,13 @@ public abstract class Perfil {
 	private Vector<Tweet> timeline;
 	private boolean ativo;
 	
-	public Perfil(){}
+	public Perfil(){
+		
+		this.seguidores = new Vector<Perfil>();
+		this.seguidos = new Vector<Perfil>();
+		this.timeline = new Vector<Tweet>();
+		
+	}
 
 	public void addSeguido(Perfil usuario) {
 		

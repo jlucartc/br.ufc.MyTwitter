@@ -9,22 +9,25 @@ import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import GUI.classesAbstratas.MyTwitterViewCadastro;
+import GUI.interfaces.MyTwitterView;
+import GUI.interfaces.MyTwitterViewManager;
 import classes.PessoaFisica;
 import excecoes.PEException;
 import excecoes.UJCException;
 import listeners.FazerCadastroListener;
 import listeners.PlaceholderListener;
+import listeners.TerminarListener;
 import listeners.VoltarListener;
 import myTwitter.MyTwitter;
 
-public class MyTwitterCadastro extends JFrame{
+@SuppressWarnings("serial")
+public class MyTwitterCadastro extends 	MyTwitterViewCadastro implements MyTwitterView{
 
-	private JLabel logo;
 	private JLabel usuarioLabel;
 	private JLabel aviso;
 	private JLabel cpfLabel;
@@ -33,24 +36,19 @@ public class MyTwitterCadastro extends JFrame{
 	private JButton cadastrar;
 	private JButton voltar;
 	private JPanel botoes;
-	private JPanel logoPanel;
 	private MyTwitter mytwitter;
-	private boolean isPessoaFisica;
-	private MyTwitterScreenManager screenManager;
+	private MyTwitterViewManager viewManager;
 	
-	public MyTwitterCadastro(MyTwitterScreenManager screenManager,MyTwitter mytwitter) {
+	public MyTwitterCadastro(MyTwitterViewManager viewManager,MyTwitter mytwitter) {
 		
-		this.screenManager = screenManager;
+		this.viewManager = viewManager;
 		this.aviso = new JLabel();
 		this.aviso.setAlignmentX(CENTER_ALIGNMENT);
 		this.cpfLabel = new JLabel("CPF");
 		this.usuarioLabel = new JLabel("Usuário");
 		
-		this.isPessoaFisica = false;
 		this.cpf = new JTextField("Digite seu cpf: ");
 		this.mytwitter = mytwitter;
-		this.logo = new JLabel("MyTwitter");
-		this.logoPanel = new JPanel();
 		this.usuario = new JTextField("Digite seu usuário: ");
 		this.cadastrar = new JButton("Cadastrar");
 		this.voltar = new JButton("Voltar");
@@ -91,8 +89,10 @@ public class MyTwitterCadastro extends JFrame{
 		this.add(this.cpf);
 		this.add(Box.createRigidArea(new Dimension(0,100)));
 		this.add(this.botoes);
+		this.addWindowListener(new TerminarListener());
 		
 		this.setVisible(true);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
 
@@ -107,8 +107,10 @@ public class MyTwitterCadastro extends JFrame{
 		
 		try{
 			
-			this.mytwitter.criarPerfil(new PessoaFisica(this.usuario.getText(),Long.parseLong(this.cpf.getText())));
+			this.mytwitter.criarPerfil(new PessoaFisica(this.getUsuario(),Long.parseLong(this.cpf.getText())));
 			this.setAviso("Cadastro feito com sucesso!",Color.GREEN);
+			System.out.println(this.usuario.getText());
+			System.out.println(this.usuario.getText().length());
 			
 		}catch(PEException | UJCException e){
 			
@@ -136,17 +138,32 @@ public class MyTwitterCadastro extends JFrame{
 		
 	}
 	
-	public MyTwitterScreenManager getScreenManager(){
-		
-		return this.screenManager;
-		
-	}
-	
 	public void resetar(){
 		
 		this.aviso.setText("");
 		this.usuario.setText("Digite seu usuário: ");
 		this.cpf.setText("Digite seu cpf: ");
+		
+	}
+
+	@Override
+	public MyTwitterViewManager getViewManager() {
+		
+		return this.viewManager;
+		
+	}
+
+	@Override
+	public void mostrar(boolean mostrar) {
+		
+		this.setVisible(mostrar);
+		
+	}
+
+	@Override
+	public void recarregarView() {
+		
+		this.resetar();
 		
 	}
 	

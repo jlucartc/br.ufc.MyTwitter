@@ -6,13 +6,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import GUI.MyTwitterCadastro;
+import GUI.MyTwitterLogin;
+import GUI.interfaces.MyTwitterView;
 
 public class VoltarListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		((MyTwitterCadastro)(((JButton)e.getSource()).getTopLevelAncestor())).getScreenManager().login();
+		MyTwitterView view = ((MyTwitterView)((JButton)e.getSource()).getTopLevelAncestor());
+
+		if(MyTwitterCadastro.class.isAssignableFrom(view.getClass())){
+			
+			view.getViewManager().ativarView(MyTwitterLogin.class);
+			
+			
+		}
 		
 	}
 

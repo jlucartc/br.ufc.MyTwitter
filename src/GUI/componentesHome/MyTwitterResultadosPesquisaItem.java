@@ -1,4 +1,4 @@
-package GUI;
+package GUI.componentesHome;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,12 +9,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class MyTwitterResultadosPesquisaItem extends JPanel{
 
 	private JLabel usuarioLabel;
 	private JLabel seguidoresLabel;
 	
-	MyTwitterResultadosPesquisaItem(String usuario, int seguidores){
+	public MyTwitterResultadosPesquisaItem(String usuario, int seguidores){
 		
 		this.usuarioLabel = new JLabel(usuario);
 		this.seguidoresLabel = new JLabel(Integer.toString(seguidores)+" seguidores");

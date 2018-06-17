@@ -158,22 +158,32 @@ public class MyTwitter implements ITwitter{
 				
 				Iterator<Tweet> iterator = tweets.iterator();
 				
-				while(iterator.hasNext()) {
+				if(tweets != null){
 					
-					Tweet tweet = iterator.next();
 					
-					if(!tweet.getUsuario().equals(usuario)) {
+					while(iterator.hasNext()) {
 						
-						iterator.remove();
+						Tweet tweet = iterator.next();
+						
+						if(!tweet.getUsuario().equals(usuario)) {
+							
+							iterator.remove();
+							
+						}
 						
 					}
 					
+					return tweets;
+					
+				}else{
+					
+					return new Vector<Tweet>();
+					
 				}
-				
-				return tweets;
+
 				
 			}else {
-				
+
 				throw new PDException();
 				
 			}
@@ -283,21 +293,30 @@ public class MyTwitter implements ITwitter{
 			
 				Vector<Perfil> seguidores = perfil.getSeguidores();
 				
-				Iterator<Perfil> iterator = seguidores.iterator();
-				
-				while(iterator.hasNext()){
+				if(seguidores !=  null){
 					
-					Perfil seguidor = iterator.next();
+					Iterator<Perfil> iterator = seguidores.iterator();
 					
-					if(this.repositorio.buscar(seguidor.getUsuario()) != null || !(seguidor.isAtivo()) ) {
+					while(iterator.hasNext()){
 						
-						iterator.remove();
+						Perfil seguidor = iterator.next();
+						
+						if(this.repositorio.buscar(seguidor.getUsuario()) != null || !(seguidor.isAtivo()) ) {
+							
+							iterator.remove();
+							
+						}
 						
 					}
 					
+					return seguidores;
+					
+				}else{
+					
+					return new Vector<Perfil>();
+					
 				}
-				
-				return seguidores;
+
 				
 			}else {
 				

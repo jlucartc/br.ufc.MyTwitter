@@ -1,14 +1,16 @@
-package GUI;
+package GUI.componentesHome;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class MyTwitterStatus extends JPanel{
 
 	private JLabel usuarioLabel;
@@ -35,9 +37,9 @@ public class MyTwitterStatus extends JPanel{
 		this.statusLabelsPanel = new JPanel();
 		this.statusQuantidadesPanel = new JPanel();
 		
-		this.setMaximumSize(new Dimension(300,200));
-		this.setMinimumSize(new Dimension(300,200));
-		this.setPreferredSize(new Dimension(300,200));
+		this.setMaximumSize(new Dimension(300,210));
+		this.setMinimumSize(new Dimension(300,210));
+		this.setPreferredSize(new Dimension(300,210));
 		this.setAlignmentY(TOP_ALIGNMENT);
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		
@@ -74,7 +76,7 @@ public class MyTwitterStatus extends JPanel{
 		this.statusQuantidadesPanel.setMaximumSize(new Dimension(400,50));
 		
 		this.usuarioLabelPanel.add(this.usuarioLabel);
-		this.usuarioLabelPanel.setBackground(Color.CYAN);
+		//this.usuarioLabelPanel.setBackground(Color.CYAN);
 		this.statusLabelsPanel.add(this.seguidoresLabel);
 		this.statusLabelsPanel.add(this.seguidosLabel);
 		this.statusLabelsPanel.add(this.tweetsLabel);
@@ -82,6 +84,7 @@ public class MyTwitterStatus extends JPanel{
 		this.statusQuantidadesPanel.add(this.seguidosQuantidadeLabel);
 		this.statusQuantidadesPanel.add(this.tweetsQuantidadeLabel);
 		
+		this.add(Box.createRigidArea(new Dimension(300,10)));
 		this.add(this.usuarioLabelPanel);
 		this.add(this.statusLabelsPanel);
 		this.add(this.statusQuantidadesPanel);

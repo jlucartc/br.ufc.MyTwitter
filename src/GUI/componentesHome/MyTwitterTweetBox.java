@@ -1,4 +1,4 @@
-package GUI;
+package GUI.componentesHome;
 
 import java.awt.Dimension;
 
@@ -12,6 +12,7 @@ import excecoes.PDException;
 import excecoes.PIException;
 import myTwitter.MyTwitter;
 
+@SuppressWarnings("serial")
 public class MyTwitterTweetBox extends JPanel{
 
 	private JButton tweetar;
@@ -19,7 +20,7 @@ public class MyTwitterTweetBox extends JPanel{
 	private String usuario;
 	private MyTwitter mytwitter;
 	
-	MyTwitterTweetBox(MyTwitter mytwitter,String usuario){
+	public MyTwitterTweetBox(MyTwitter mytwitter,String usuario){
 		
 		this.usuario = usuario;
 		this.mytwitter = mytwitter;

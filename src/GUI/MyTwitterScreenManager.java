@@ -1,61 +1,35 @@
 package GUI;
 
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-
+import GUI.classesAbstratas.MyTwitterViewCadastro;
+import GUI.classesAbstratas.MyTwitterViewHome;
+import GUI.classesAbstratas.MyTwitterViewLogin;
+import GUI.interfaces.MyTwitterView;
+import GUI.interfaces.MyTwitterViewManager;
 import myTwitter.MyTwitter;
 import repositorio.IRepositorioUsuario;
 
-public class MyTwitterScreenManager extends JFrame{
+public class MyTwitterScreenManager implements MyTwitterViewManager{
 
-	private MyTwitterCadastro myTwitterCadastro;
-	private MyTwitterLogin myTwitterLogin;
-	private MyTwitterHome myTwitterHome;
+	private MyTwitterViewCadastro myTwitterCadastro;
+	private MyTwitterViewLogin myTwitterLogin;
+	private MyTwitterViewHome myTwitterHome;
 	private MyTwitter mytwitter;
 	private IRepositorioUsuario repositorio;
+
 	
 	public MyTwitterScreenManager(IRepositorioUsuario repositorio){
 	
 		this.repositorio = repositorio;
 		this.mytwitter = new MyTwitter(this.repositorio);
 		
+		this.myTwitterHome = new MyTwitterHome(this,"",this.mytwitter);
 		this.myTwitterCadastro = new MyTwitterCadastro(this,this.mytwitter);
-		this.myTwitterCadastro.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.myTwitterLogin = new MyTwitterLogin(this,this.repositorio);
-		this.myTwitterLogin.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.myTwitterCadastro.setVisible(false);
+		this.myTwitterLogin = (MyTwitterViewLogin) new MyTwitterLogin(this,this.repositorio);
+		
+		this.ativarView(this.myTwitterLogin.getClass());
 	
 	}
-	
-	public void cadastro(){
-		
-		this.myTwitterLogin.setVisible(false);
-		this.myTwitterLogin.dispose();
-		this.myTwitterLogin.setVisible(false);
-		this.myTwitterCadastro.resetar();
-		this.myTwitterCadastro.setVisible(true);
-		
-	}
-	
-	public void login(){
-		
-		this.myTwitterCadastro.setVisible(false);
-		this.myTwitterCadastro.dispose();
-		this.myTwitterCadastro.setVisible(false);
-		this.myTwitterLogin.setVisible(true);
-		this.myTwitterLogin.resetar();
-		
-	}
-	
-	public void home(String usuario){
-		
-		this.myTwitterLogin.setVisible(false);
-		this.myTwitterCadastro.setVisible(false);
-		this.myTwitterHome = new MyTwitterHome(usuario);
-		this.myTwitterHome.setVisible(true);
-		
-	}
+
 	
 	public MyTwitter getMyTwitter(){
 		
@@ -68,7 +42,83 @@ public class MyTwitterScreenManager extends JFrame{
 		return this.repositorio;
 		
 	}
+
+	public void encerrar() {
+		
+		System.exit(0);
+		
+	}
 	
+	public MyTwitterViewLogin getMyTwitterLogin(){
+		
+		return this.myTwitterLogin;
+		
+	}
 	
+	public MyTwitterViewCadastro getMyTwitterCadastro(){
+		
+		return this.myTwitterCadastro;
+		
+	}
+	
+	public MyTwitterViewHome getMyTwitterHome(){
+		
+		return this.myTwitterHome;
+		
+	}
+
+
+	@Override
+	public void ativarView(Class view) {
+		
+		if(MyTwitterViewCadastro.class.isAssignableFrom(view)){
+			
+			this.myTwitterHome.mostrar(false);
+			this.myTwitterLogin.mostrar(false);
+			this.myTwitterCadastro.recarregarView();
+			this.myTwitterCadastro.mostrar(true);
+			
+		}else if(MyTwitterViewHome.class.isAssignableFrom(view)){
+			
+			this.myTwitterCadastro.mostrar(false);
+			this.myTwitterLogin.mostrar(false);
+			this.myTwitterHome.dispose();
+			this.myTwitterHome = new MyTwitterHome(this,this.myTwitterLogin.getUsuario(),this.mytwitter);
+			this.myTwitterHome.recarregarView();
+			this.myTwitterHome.mostrar(true);
+
+			
+		}else if(MyTwitterLogin.class.isAssignableFrom(view)){
+			
+			this.myTwitterHome.mostrar(false);
+			this.myTwitterCadastro.mostrar(false);
+			this.myTwitterLogin.recarregarView();
+			this.myTwitterLogin.mostrar(true);
+			
+		}
+		
+	}
+
+
+	@Override
+	public MyTwitterView getView(Class view) {
+		
+		if(MyTwitterViewHome.class.isAssignableFrom(view)){
+			
+			return this.myTwitterHome;
+			
+		}else if(MyTwitterViewHome.class.isAssignableFrom(view)){
+			
+			return this.myTwitterLogin;
+			
+		}else if(MyTwitterViewCadastro.class.isAssignableFrom(view)){
+			
+			return this.myTwitterCadastro;
+			
+		}
+		
+		return null;
+		
+	}
 	
 }

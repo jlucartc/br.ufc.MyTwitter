@@ -1,4 +1,4 @@
-package GUI;
+package GUI.componentesHome;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class MyTwitterTimelineItem extends JPanel{
 
 	private JLabel autorLabel;

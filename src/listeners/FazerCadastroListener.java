@@ -4,22 +4,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.SwingUtilities;
 
 import GUI.MyTwitterCadastro;
 import GUI.MyTwitterScreenManager;
-import classes.PessoaFisica;
-import excecoes.PEException;
-import excecoes.UJCException;
+import GUI.interfaces.MyTwitterView;
+import GUI.interfaces.MyTwitterViewManager;
 
 public class FazerCadastroListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
-			MyTwitterCadastro myTwitterCadastro = (MyTwitterCadastro)((JButton)e.getSource()).getTopLevelAncestor();
+		
+		MyTwitterViewManager viewManager = ((MyTwitterView)(((JButton)e.getSource()).getTopLevelAncestor())).getViewManager(); 
+		
+		if(viewManager instanceof MyTwitterScreenManager){
 			
-			myTwitterCadastro.fazerCadastro();
+			MyTwitterView view = (((MyTwitterScreenManager) viewManager).getMyTwitterCadastro());
+			
+			if(view instanceof MyTwitterCadastro){
+				
+				((MyTwitterCadastro) view).fazerCadastro();
+				
+			}
+			
+		}
+		
 	}
 
 }

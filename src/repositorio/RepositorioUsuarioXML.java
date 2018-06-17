@@ -30,7 +30,6 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 			this.carregarUsuarios();
 		
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -49,20 +48,26 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 		
 		Iterator<Perfil> iterator = this.usuarios.iterator();
 		
+		Perfil perfil = null;
+		
 		while(iterator.hasNext()) {
 			
-				Perfil perfil = iterator.next();
+				perfil = iterator.next();
 			
 				if(perfil.getUsuario().equals(usuario)) {
 					
+					System.out.println("Palavra "+usuario);
 					return perfil;
+					
+				}else{
+					
+					perfil = null;
 					
 				}
 			
 		}
-		
-		return null;
-		
+	
+		return perfil;
 		
 	}
 
@@ -86,6 +91,7 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	void carregarUsuarios() throws IOException{
 		
 		File arquivo = new File(this.caminho);
@@ -100,15 +106,22 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 		
 		if(!arquivo.exists()){
 			
-			this.usuarios = new Vector();
+			this.usuarios = new Vector<Perfil>();
 			
 		}else{
 			FileInputStream entrada = new FileInputStream(arquivo);
-			
 				
 			XStream xstream = new XStream();
+			if(entrada.available() > 0) {
 				
-			this.usuarios = (Vector<Perfil>) xstream.fromXML(entrada);
+				this.usuarios = (Vector<Perfil>)xstream.fromXML(entrada);
+				
+			}else{
+				
+				this.usuarios = new Vector<Perfil>();
+				
+			}
+			entrada.close();
 		}
 		
 	}
@@ -136,6 +149,8 @@ public class RepositorioUsuarioXML implements IRepositorioUsuario{
 		XStream xstream = new XStream();
 			
 		xstream.toXML(this.usuarios, saida);
+		
+		saida.close();
 			
 		
 	}
